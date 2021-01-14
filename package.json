@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/MostHegz/amazona#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.12"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
