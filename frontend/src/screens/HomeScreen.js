@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 // import axios from 'axios';
 // import data from './data';
-import Product from '../Product';
-import Loading from '../Loading';
-import Message from '../Message';
+import Product from '../components/Product';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 

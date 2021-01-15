@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-import Message from '../Message';
+import Message from '../components/Message';
 
 export default function CartScreen(props) {
     const productId = props.match.params.id;

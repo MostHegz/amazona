@@ -1,10 +1,10 @@
 import React, {useEffect,useState}from 'react';
 // import data from "./data";
-import Rating from "../Rating"
+import Rating from "../components/Rating"
 import {useDispatch, useSelector} from 'react-redux';
 import {detailsProduct} from '../actions/productActions'
-import Message from '../Message';
-import Loading from '../Loading';
+import Message from '../components/Message';
+import Loading from '../components/Loading';
 
 function ProductScreen(props) {
     const dispatch = useDispatch();

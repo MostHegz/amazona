@@ -2,8 +2,8 @@ import React,{useEffect, useState} from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import {register} from '../actions/userActions'
-import Loading from '../Loading';
-import Message from '../Message';
+import Loading from '../components/Loading';
+import Message from '../components/Message';
 
 export default function RegisterScreen(props) {
     const [name, setName] = useState('');
