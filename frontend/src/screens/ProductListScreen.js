@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom';
 import { createProduct, deleteProduct, listProducts } from '../actions/productActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstant';
 
 export default function ProductListScreen(props) {
+    const {pageNumber=1} = useParams();
     const productList = useSelector(state => state.productList);
-    const {loading, error, products}=productList;
+    const {loading, error, products, page, pages}=productList;
     const productCreate = useSelector(state => state.productCreate);
     const {
         loading: loadingCreate, 
@@ -30,8 +32,8 @@ export default function ProductListScreen(props) {
         if(successDelete){
             dispatch({type: PRODUCT_DELETE_RESET});
         }
-        dispatch(listProducts());
-    },[dispatch,createdProduct,props.history,successCreate,successDelete]);
+        dispatch(listProducts({pageNumber}));
+    },[dispatch,createdProduct,props.history,successCreate,successDelete,pageNumber]);
 
     const deleteHandler =(product) =>{
         if(window.confirm('Are you sure you want to delete this product?')){
@@ -59,7 +61,7 @@ export default function ProductListScreen(props) {
                 loading ? <Loading></Loading>
                 : error 
                 ? <Message variant='danger'>{error}</Message>
-                : (
+                : (<>
                     <table className='table'>
                         <thead>
                             <tr>
@@ -101,6 +103,18 @@ export default function ProductListScreen(props) {
                             }
                         </tbody>
                     </table>
+                    <div className='pagination row center'>
+                        {
+                            [...Array(pages).keys()].map(number=>
+                                <Link 
+                                    className={number+1 === page? 'active' : ''}
+                                    key={number+1} 
+                                    to={`/productlist/pageNumber/${number+1}`}
+                                >{number+1}</Link> 
+                            )
+                        }
+                    </div>
+                </>
                 )
             }
         </div>

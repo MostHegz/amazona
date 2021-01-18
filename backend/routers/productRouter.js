@@ -11,12 +11,15 @@ const productRouter = express.Router();
 
 
 productRouter.get('/',expressAsyncHandler(async(req,res)=>{
+    const pageSize = 6;
+    const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const category = req.query.category || '';
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};;
     const categoryFilter = category ? {category} : {};
-    const products = await Product.find({ ...nameFilter, ...categoryFilter });
-    res.send(products);
+    const count = await Product.count({ ...nameFilter, ...categoryFilter })
+    const products = await Product.find({ ...nameFilter, ...categoryFilter }).skip(pageSize*(page-1)).limit(pageSize);
+    res.send({products, page, pages: Math.ceil(count / pageSize)});
 }))
 
 productRouter.get('/categories', expressAsyncHandler(async(req,res)=>{

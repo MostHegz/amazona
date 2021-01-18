@@ -157,10 +157,11 @@ function App() {
           <Route path='/orderhistory' component={OrderHistory}></Route>
           <Route path='/search/name/:name?' exact component={SearchScreen}></Route>
           <Route path='/search/category/:category' exact component={SearchScreen}></Route>
-          <Route path='/search/category/:category/name/:name' exact component={SearchScreen}></Route>
+          <Route path='/search/category/:category/name/:name/pageNumber/:pageNumber' exact component={SearchScreen}></Route>
           <Route path="/" exact component={HomeScreen}></Route>
 
           <AdminRoute path='/productlist' component={ProductListScreen}></AdminRoute>
+          <AdminRoute path='/productlist/pageNumber/:pageNumber' component={ProductListScreen}></AdminRoute>
           <AdminRoute path='/userlist' component={UserListScreen}></AdminRoute>
           <AdminRoute path='/user/:id/edit' exact component={UserEditScreen}></AdminRoute>
           </main>

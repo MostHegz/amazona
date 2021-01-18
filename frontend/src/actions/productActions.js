@@ -2,12 +2,16 @@ import {PRODUCT_CREATE_FAIL, PRODUCT_CREATE_REQUEST, PRODUCT_CREATE_SUCCESS, PRO
 import Axios from 'axios';
 
 
-export const listProducts = ({ name = '' ,category=''}) => async (dispatch) =>{
+export const listProducts = ({ 
+    name = '' ,
+    category='',
+    pageNumber='',
+}) => async (dispatch) =>{
     dispatch({
         type: PRODUCT_LIST_REQUEST,
     });
     try {
-        const {data} = await Axios.get(`/api/products?name=${name}&category=${category}`);
+        const {data} = await Axios.get(`/api/products?pageNumber=${pageNumber}&name=${name}&category=${category}`);
         dispatch({type: PRODUCT_LIST_SUCCESS, payload:data})
     } catch (error) {
         dispatch({type:PRODUCT_LIST_FAIL, payload: error.message})
