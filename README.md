@@ -66,6 +66,11 @@ This is a souq-like website for a fashion e-commerce web application.
 * `put('/:id')` edit product in database (must be an admin)
 * `delete('/:id')` delete product from database (must be an admin)
 
+## `/api/order` (order router)
+* `post('/')` create a new order (must be signed in)
+* `get('/:id')` fetch a certain order (must be signed in)
+* `get('/history')` fetch previous orders (must be signed in)
+
 
 # To do list
 * Cleaning the code a little bit
