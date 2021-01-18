@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 // import data from './data.js';
 import productRouter from './routers/productRouter.js';
 import userRouter from './routers/userRouter.js';
+import orderRouter from './routers/orderRouter.js';
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,8 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/souqclone',{
 
 app.use('/api/users',userRouter)
 app.use('/api/products', productRouter);
+
+app.use('/api/orders', orderRouter);
 
 app.get('/',(req,res) =>{
     res.send('Server is ready')
