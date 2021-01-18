@@ -30,7 +30,7 @@ export default function ProductListScreen(props) {
         if(successDelete){
             dispatch({type: PRODUCT_DELETE_RESET});
         }
-        dispatch(listProducts());
+        dispatch(listProducts({}));
     },[dispatch,createdProduct,props.history,successCreate,successDelete]);
 
     const deleteHandler =(product) =>{
