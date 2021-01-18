@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createProduct, listProducts } from '../actions/productActions';
+import { createProduct, deleteProduct, listProducts } from '../actions/productActions';
 import Loading from '../components/Loading';
 import Message from '../components/Message';
-import { PRODUCT_CREATE_RESET } from '../constants/productConstant';
+import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstant';
 
 export default function ProductListScreen(props) {
     const productList = useSelector(state => state.productList);
@@ -15,17 +15,28 @@ export default function ProductListScreen(props) {
         success: successCreate, 
         product: createdProduct
     } = productCreate;
+    const productDelete = useSelector(state => state.productDelete);
+    const{
+        loading: loadingDelete,
+        error: errorDelete,
+        success: successDelete
+    } = productDelete;
     const dispatch = useDispatch();
     useEffect(()=>{
         if (successCreate) {
             dispatch({type: PRODUCT_CREATE_RESET});
             props.history.push(`/product/${createdProduct._id}/edit`)
         }
+        if(successDelete){
+            dispatch({type: PRODUCT_DELETE_RESET});
+        }
         dispatch(listProducts());
-    },[dispatch,createdProduct,props.history,successCreate]);
-    
-    const deleteHandler =() =>{
-        //delete
+    },[dispatch,createdProduct,props.history,successCreate,successDelete]);
+
+    const deleteHandler =(product) =>{
+        if(window.confirm('Are you sure you want to delete this product?')){
+            dispatch(deleteProduct(product._id))
+        }
     }
 
     const createHandler =() =>{
@@ -41,6 +52,9 @@ export default function ProductListScreen(props) {
             </div>
             {loadingCreate && <Loading></Loading>}
             {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+
+            {loadingDelete && <Loading></Loading>}
+            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
             {
                 loading ? <Loading></Loading>
                 : error 
