@@ -51,8 +51,11 @@ This is a souq-like website for a fashion e-commerce web application.
 * ```post('/register')```for user registeration
 * ```get('/:id')``` to fetch a specific user data
 * ```get('/')``` fetch all users data (must be an admin)
-*```delete('/:id')``` delete a specific user data (must be an admin)
-*```put('/:id')``` edit a specific user (must be an admin)
+* ```delete('/:id')``` delete a specific user data (must be an admin)
+* ```put('/:id')``` edit a specific user (must be an admin)
+
+## ```/api/uploads``` (uploadRouter)
+* ```post('/')``` uploads a file in `/uploads` (must be authenticated)
 
 # To do list
 * Cleaning the code a little bit
