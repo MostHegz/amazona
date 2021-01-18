@@ -45,17 +45,27 @@ This is a souq-like website for a fashion e-commerce web application.
 
 # API Documentation
 * [https://mosts-amazonclone.herokuapp.com/](https://mosts-amazonclone.herokuapp.com/) is the website home page
-## ```/api/users``` (userRouter)
-* ```get('/seed')``` for initializing user database (works only once)
-* ```post('/signin')``` for user signin
-* ```post('/register')```for user registeration
-* ```get('/:id')``` to fetch a specific user data
-* ```get('/')``` fetch all users data (must be an admin)
-* ```delete('/:id')``` delete a specific user data (must be an admin)
-* ```put('/:id')``` edit a specific user (must be an admin)
+## `/api/users` (userRouter)
+* `get('/seed')` for initializing user database (works only once)
+* `post('/signin')` for user signin
+* `post('/register')` for user registeration
+* `get('/:id')` to fetch a specific user data
+* `get('/')` fetch all users data (must be an admin)
+* `delete('/:id')` delete a specific user data (must be an admin)
+* `put('/:id')` edit a specific user (must be an admin)
 
-## ```/api/uploads``` (uploadRouter)
-* ```post('/')``` uploads a file in `/uploads` (must be authenticated)
+## `/api/uploads` (uploadRouter)
+* `post('/')` uploads a file in `/uploads` (must be authenticated)
+
+## `/api/products` (productRouter)
+* `get('/seed')` initialize products database
+* `get('/')` fetch products from server
+* `get('/:id')` fetch a specific product 
+* `get('?name=${name}&category=${category}')` fetch filtered products according to their name and category
+* `post('/')` create a new sample product (must be an admin)
+* `put('/:id')` edit product in database (must be an admin)
+* `delete('/:id')` delete product from database (must be an admin)
+
 
 # To do list
 * Cleaning the code a little bit
