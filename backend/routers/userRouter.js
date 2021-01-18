@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
 import data from '../data.js';
 import User from '../models/userModel.js';
-import { generateToken } from '../utils.js';
+import { generateToken, isAdmin, isAuth } from '../utils.js';
 
 const userRouter = express.Router();
 
@@ -45,6 +45,49 @@ userRouter.post('/register', expressAsyncHandler(async(req,res) =>{
                 isAdmin: user.isAdmin,
                 token: generateToken(createdUser),
     })
+}));
+
+userRouter.get('/:id', expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+        res.send(user);
+    } else {
+        res.status(404).send({ message: 'User Not Found' });
+    }
+})
+);
+
+userRouter.get('/',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
+    const users = await User.find({});
+    res.send(users);
+}));
+
+userRouter.delete('/:id',isAuth, isAdmin, expressAsyncHandler(async (req, res)=>{
+    const user = await User.findById(req.params.id);
+    if(user){
+        if (user.email === 'admin@admin.com') {
+            res.status(400).send({message: 'you can not delete admin user'});
+            return;
+        }
+        const deleteUser = await user.remove();
+        res.send({message: 'User Deleted', user: deleteUser})
+    }else{
+        res.status(404).send({message: 'User not found'})
+    }
+}));
+
+userRouter.put('/:id', isAuth, isAdmin, expressAsyncHandler(async (req,res) =>{
+    const user = await User.findById(req.params.id);
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin || user.isAdmin;
+        const updatedUser = await user.save();
+        res.send({message: 'User updated', user: updatedUser})
+    }else{
+        res.status(404).send({message: 'User not found'});
+    }
 }))
+
 
 export default userRouter;

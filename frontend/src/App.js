@@ -15,6 +15,8 @@ import  ProductScreen from "./screens/ProductScreen";
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignInScreen from './screens/SignInScreen';
+import UserEditScreen from './screens/UserEditScreen';
+import UserListScreen from './screens/UserListScreen';
 
 
 function App() {
@@ -98,7 +100,9 @@ function App() {
           <Route path='/orderhistory' component={OrderHistory}></Route>
           <Route path="/" exact component={HomeScreen}></Route>
           <AdminRoute path='/productlist' component={ProductListScreen}></AdminRoute>
-        </main>
+          <AdminRoute path='/userlist' component={UserListScreen}></AdminRoute>
+          <AdminRoute path='/user/:id/edit' exact component={UserEditScreen}></AdminRoute>
+          </main>
         <footer className="row center">All right reserved</footer>
       </div>
     </Router>
