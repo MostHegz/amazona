@@ -31,7 +31,7 @@ export default function PaymentScreen(props) {
                             type='radio'
                             id='whenDelivered'
                             value='WhenDelivered'
-                            name='whenDelivered'
+                            name='paymentMethod'
                             required 
                             checked
                             onChange={(e) => setPaymentMethod(e.target.value)}
