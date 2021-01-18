@@ -13,7 +13,7 @@ function HomeScreen() {
     const { loading, error, products } = productList;
 
     useEffect(() => {
-        dispatch(listProducts())
+        dispatch(listProducts({}))
     }, [dispatch])
 
     return (
@@ -22,11 +22,14 @@ function HomeScreen() {
             :
             error? <Message variant='danger'>{error}</Message>
                 :
-                (<div className="row center">
-                {products.map((product) => (
-                    <Product key={product._id} product={product}></Product>
-                ))}
-                </div>)
+                (<>
+                    {products.length === 0 &&<Message variant='danger'>No Product Found</Message>}
+                    <div className="row center">
+                    {products.map((product) => (
+                        <Product key={product._id} product={product}></Product>
+                    ))}
+                    </div>
+                </>)
             }
         </div>
     )

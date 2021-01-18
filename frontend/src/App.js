@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {BrowserRouter as Router , Link, Route} from 'react-router-dom';
 import { signout } from './actions/userActions';
 import AdminRoute from './components/AdminRoute';
+import SearchBox from './components/SearchBox';
 import CartScreen from './screens/CartScreen';
 import  HomeScreen from "./screens/HomeScreen";
 import OrderHistory from './screens/OrderHistoryScreen';
@@ -13,6 +14,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import  ProductScreen from "./screens/ProductScreen";
 import RegisterScreen from './screens/RegisterScreen';
+import SearchScreen from './screens/SearchScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignInScreen from './screens/SignInScreen';
 import UserEditScreen from './screens/UserEditScreen';
@@ -36,8 +38,13 @@ function App() {
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              souqclone
+              amazonclone
             </Link>
+          </div>
+          <div>
+            <Route 
+              render={({history}) => <SearchBox history={history}></SearchBox>}>
+            </Route>
           </div>
           <div>
             <Link to="/cart">
@@ -98,7 +105,9 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path='/order/:id' component={OrderScreen}></Route>
           <Route path='/orderhistory' component={OrderHistory}></Route>
+          <Route path='/search/name/:name?' exact component={SearchScreen}></Route>
           <Route path="/" exact component={HomeScreen}></Route>
+
           <AdminRoute path='/productlist' component={ProductListScreen}></AdminRoute>
           <AdminRoute path='/userlist' component={UserListScreen}></AdminRoute>
           <AdminRoute path='/user/:id/edit' exact component={UserEditScreen}></AdminRoute>
